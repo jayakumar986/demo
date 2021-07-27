@@ -1,0 +1,67 @@
+<div class="container pt-5">
+  <div class="row justify-content-sm-center pt-5">
+      <div class="col-sm-6 shadow round pb-3">
+        <h1 class="text-center pt-3 text-secondary">Example Form</h1>
+          <form [formGroup]="exform">
+              <div class="form-group">
+                <label class="col-form-label">Name:</label>
+                <input formControlName="name" type="text" class="form-control" placeholder="name" appAlphabetValidator>
+                <small [hidden]="name.valid || (name.pristine && !f.submitted)">
+                  Username is required (minimum 5 characters).
+              </small>
+              </div>
+              <br>
+              <div class="form-group">
+                <label class="col-form-label">Email:</label>
+                <input formControlName="email" type="text" emailValidator class="form-control" placeholder="email">
+               
+              </div>
+              <br>
+              <div class="form-group">
+                <label class="col-form-label">Phone:</label>
+                <input formControlName="phone" MobileValidator type="text" class="form-control" placeholder="phone number"> 
+               
+              </div>
+
+  
+              <br>
+              <div class="form-group">
+                <label class="col-form-label">Pancard:</label>
+                <input formControlName="pancard" type="text" class="form-control" placeholder="pancard" appPancardvalidatior>
+                
+              </div>
+              <br>
+             <!--<div class="form-group">
+                <label class="col-form-label">IPAddress:</label>
+                <input formControlName="ipaddress" type="text" class="form-control" placeholder="ipaddress">
+                
+              </div> -->
+              <div class="form-group">
+                <label>IP Address</label>
+                <input  appIpaddress type="ipaddress"
+                      class="form-control"
+                      formControlName="ipaddress"
+                      [ngClass]="{
+                    'is-invalid': ipaddress.invalid && (ipaddress.dirty || ipaddress.touched),
+                    'is-valid': ipaddress.valid && (ipaddress.dirty || ipaddress.touched)
+                  }">
+                <div class="form-control-feedback invalid-feedback" *ngIf="ipaddress.errors">
+                  <p *ngIf="ipaddress.errors.required">IP Address is required</p>
+                  <p *ngIf="ipaddress.errors.pattern">ipadddress is invalid</p>
+                </div>
+              </div>
+              <br>
+              <div class="form-group">
+                <label class="col-form-label">MAC:</label>
+                <input appMacaddress formControlName="mac" type="text" class="form-control" placeholder="macaddress is">
+                
+              </div>
+              <br>
+              <button (click)="clicksub()" [disabled]="exform.invalid" type="button" class="btn btn-primary">Submit</button>
+            </form>
+            {{exform.value| json}}
+      </div>
+  </div>
+</div>
+
+
